@@ -89,4 +89,4 @@ ENV/
 .ropeproject
 
 # Visual studio code
-.vscode/*
+/.vscode
