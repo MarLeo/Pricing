@@ -1,10 +1,14 @@
 import binomial_tree_pricing as btp
-    
-    def if __name__ == '__main__':
-        btp.__init__(btp.OptionType, 100, 98, 1.0425, 0.9592, 4)
-        premium = btp.binomial_tree()
-        print "European CALL:", premium
-        
-    
-    
+import datetime as dt
+import time as t
 
+optionType = 'Call'
+exerciseType = 'European'
+start_time = t.perf_counter()
+opt = btp.Option(100, 90, 1.10, 0.90, 4, 100, optionType, exerciseType)
+price = opt.binomial_pricer()
+end_time = t.perf_counter()
+
+print (exerciseType, optionType, ": ", price)
+print('Elapsed time:', (end_time - start_time))
+#print('European CALL:', price)
