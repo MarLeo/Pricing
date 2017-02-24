@@ -50,11 +50,11 @@ class Option:
         for i in range(self.num_steps - 1, -1, -1):
             for j in range(i + 1):
                 if self.optionExercise == ExerciseType.EUROPEAN:
-                    pay_off[i, j] = (1 / self.rate)*(self.prob_up*pay_off[i + 1, j + 1] + self.prob_down*pay_off[i + 1,j])
+                    pay_off[i, j] = (1 / self.rate)*(self.prob_up*pay_off[i + 1, j] + self.prob_down*pay_off[i + 1,j + 1])
                 elif self.optionExercise == ExerciseType.AMERICAN:
                     if self.optionType == OptionType.CALL:
-                        pay_off[i, j] = max(stock_price[i, j] - self.strike, (1 / self.rate)*(self.prob_up*pay_off[i + 1, j] + self.prob_down*pay_off[i + 1, j]))
+                        pay_off[i, j] = max(stock_price[i, j] - self.strike, (1 / self.rate)*(self.prob_up*pay_off[i + 1, j] + self.prob_down*pay_off[i + 1, j+ 1]))
                     else:
-                        pay_off[i, j] = max(self.strike - stock_price[i, j]  , (1 / self.rate)*(self.prob_up*pay_off[i + 1, j + 1] + self.prob_down*pay_off[i + 1, j]))    
+                        pay_off[i, j] = max(self.strike - stock_price[i, j]  , (1 / self.rate)*(self.prob_up*pay_off[i + 1, j] + self.prob_down*pay_off[i + 1, j + 1]))    
         return pay_off[0, 0]
 
