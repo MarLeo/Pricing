@@ -2,6 +2,7 @@ import numpy as np
 import math as m
 from enum import Enum
 
+
 """
 """
 class ExerciseType(object):
@@ -53,8 +54,8 @@ class Option:
                     pay_off[i, j] = (1 / self.rate)*(self.prob_up*pay_off[i + 1, j] + self.prob_down*pay_off[i + 1,j + 1])
                 elif self.optionExercise == ExerciseType.AMERICAN:
                     if self.optionType == OptionType.CALL:
-                        pay_off[i, j] = max(stock_price[i, j] - self.strike, (1 / self.rate)*(self.prob_up*pay_off[i + 1, j] + self.prob_down*pay_off[i + 1, j+ 1]))
+                        pay_off[i, j] = max(stock_price[i, j] - self.strike, (1 / self.rate)*(self.prob_up*pay_off[i + 1, j] + self.prob_down*pay_off[i + 1,j + 1]))
                     else:
-                        pay_off[i, j] = max(self.strike - stock_price[i, j]  , (1 / self.rate)*(self.prob_up*pay_off[i + 1, j] + self.prob_down*pay_off[i + 1, j + 1]))    
+                        pay_off[i, j] = max(self.strike - stock_price[i, j], (1 / self.rate)*(self.prob_up*pay_off[i + 1, j] + self.prob_down*pay_off[i + 1,j + 1]))    
         return pay_off[0, 0]
 
